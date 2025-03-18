@@ -125,7 +125,27 @@
                 <button type="submit">Add App</button>
             </form>
         </div>
+<table>
+  <tr>
+    <th>App Name</th>
+    <th>Download URL</th>
+    <th>Actions</th>
+  </tr>
+  <% apps.forEach(app => { %>
+  <tr>
+    <td><%= app.name %></td>
+    <td><%= app.downloadUrl %></td>
+    <td>
+      <a href="/admin/edit/<%= app._id %>">Edit</a>
+      <a href="/admin/delete/<%= app._id %>" onclick="return confirm('Are you sure?')">Delete</a>
+    </td>
+  </tr>
+  <% }) %>
+</table>
+
     </main>
+
+
     <script>
         function toggleMenu() {
             document.body.classList.toggle("sidebar-open");
