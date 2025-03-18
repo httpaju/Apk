@@ -1,19 +1,91 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        aside {
+            width: 250px;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+        }
+        aside h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+        aside ul li {
+            margin-bottom: 15px;
+        }
+        aside ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            flex: 1;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1e40af;
+        }
+    </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
-    <form action="/admin/add" method="POST">
-        <input type="text" name="name" placeholder="App Name" required>
-        <input type="text" name="description" placeholder="Description" required>
-        <input type="text" name="imageUrl" placeholder="Image URL" required>
-        <input type="text" name="downloadUrl" placeholder="Download URL" required>
-        <button type="submit">Add App</button>
-    </form>
+    <aside>
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Add App</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </aside>
+    <main>
+        <h1>Add a New App</h1>
+        <div class="form-container">
+            <form action="/admin/add" method="POST">
+                <input type="text" name="name" placeholder="App Name" required>
+                <input type="text" name="description" placeholder="Description" required>
+                <input type="text" name="imageUrl" placeholder="Image URL" required>
+                <input type="text" name="downloadUrl" placeholder="Download URL" required>
+                <button type="submit">Add App</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
