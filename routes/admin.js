@@ -1,42 +1,41 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
-const Admin = require("../models/Admin");
-const App = require("../models/App");
-
 const router = express.Router();
 
+const ADMIN_USERNAME = "ajmal";  
+const ADMIN_PASSWORD = "ajmalajmal123";  
+
+// Login Page
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login"); // Ensure login.ejs exists in the "views" folder
 });
 
-router.post("/login", async (req, res) => {
+// Login Authentication
+router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    const admin = await Admin.findOne({ username });
 
-    if (admin && bcrypt.compareSync(password, admin.password)) {
-        req.session.admin = admin;
-        res.redirect("/admin/dashboard");
+    console.log("Received credentials:", username, password); // Debugging
+
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        req.session.isAdmin = true;
+        return res.redirect("/admin/dashboard");
     } else {
-        res.send("Invalid login credentials");
+        return res.send("Invalid login credentials");
     }
 });
 
+// Admin Dashboard (Protected Route)
 router.get("/dashboard", (req, res) => {
-    if (!req.session.admin) return res.redirect("/admin/login");
-    res.render("dashboard");
+    if (!req.session.isAdmin) {
+        return res.redirect("/admin/login");
+    }
+    res.send("Welcome to the Admin Dashboard!");
 });
 
-router.post("/add-app", async (req, res) => {
-    if (!req.session.admin) return res.redirect("/admin/login");
-
-    const { title, description, imageUrl, downloadUrl } = req.body;
-    await App.create({ title, description, imageUrl, downloadUrl });
-    res.redirect("/admin/dashboard");
-});
-
+// Logout
 router.get("/logout", (req, res) => {
-    req.session.destroy();
-    res.redirect("/admin/login");
+    req.session.destroy(() => {
+        res.redirect("/admin/login");
+    });
 });
 
 module.exports = router;
