@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
- <link rel="icon" type="image/x-icon" href="https://i.ibb.co/RXSb9zb/extracted-white-icon.png">
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/RXSb9zb/extracted-white-icon.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,10 +18,24 @@
             background-color: #1e3a8a;
             color: white;
             padding: 20px;
+            position: fixed;
+            height: 100vh;
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
         }
         aside h2 {
             font-size: 1.5rem;
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         aside ul {
             list-style: none;
@@ -33,10 +47,19 @@
         aside ul li a {
             color: white;
             text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        aside ul li a:hover {
+            background: #2563eb;
         }
         main {
             flex: 1;
             padding: 40px;
+            margin-left: 250px;
+            transition: margin-left 0.3s ease-in-out;
         }
         h1 {
             font-size: 2rem;
@@ -48,6 +71,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
+            width: 100%;
         }
         input, button {
             width: 100%;
@@ -65,15 +89,29 @@
         button:hover {
             background-color: #1e40af;
         }
+        
+        @media (max-width: 768px) {
+            aside {
+                transform: translateX(-100%);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            main {
+                margin-left: 0;
+            }
+            .sidebar-open aside {
+                transform: translateX(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <aside>
-        <h2>Admin Dashboard</h2>
+    <aside id="sidebar">
+        <h2>Admin Dashboard <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button></h2>
         <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Add App</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="/">Dashboard</a></li>
+          
         </ul>
     </aside>
     <main>
@@ -88,5 +126,10 @@
             </form>
         </div>
     </main>
+    <script>
+        function toggleMenu() {
+            document.body.classList.toggle("sidebar-open");
+        }
+    </script>
 </body>
 </html>
