@@ -30,6 +30,11 @@ app.get('/admin/edit/:id', async (req, res) => {
   res.render('edit', { app: appData });
 });
 
+// Function to validate APK URL
+function isValidApkUrl(url) {
+  return url.endsWith('.apk');
+}
+
 // Handle Update Request
 app.post('/admin/edit/:id', async (req, res) => {
   const { name, downloadUrl } = req.body;
