@@ -1,0 +1,23 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Welcome to the App Store</h1>
+    <div class="app-list">
+        <% apps.forEach(app => { %>
+            <div class="app-card">
+                <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
+                <h3><%= app.name %></h3>
+                <p><%= app.description %></p>
+                <a href="<%= app.downloadUrl %>">Download</a>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
