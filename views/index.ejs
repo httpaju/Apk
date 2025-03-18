@@ -68,6 +68,23 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .donation-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4081;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .donation-button:hover {
+            background: #e91e63;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -83,5 +100,7 @@
             </div>
         <% }) %>
     </div>
+    
+    <a href="https://aj-talk-to-stranger.onrender.com/donation" class="donation-button">Donate</a>
 </body>
 </html>
