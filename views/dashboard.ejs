@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Admin Panel</title> <link rel="stylesheet" href="/style.css"> </head>
+<body>
+    <div class="header">Admin Panel</div>
+    <div class="admin-container">
+        <h1>Add New App</h1>
+        <form method="POST" action="/admin/add-app">
+            <input type="text" name="title" placeholder="App Title" required>
+            <input type="text" name="description" placeholder="App Description" required>
+            <input type="text" name="imageUrl" placeholder="Image URL" required>
+            <input type="text" name="downloadUrl" placeholder="Download URL" required>
+            <button type="submit">Add App</button>
+        </form>
+        <a href="/admin/logout">Logout</a>
+    </div>
+</body>
+</html>

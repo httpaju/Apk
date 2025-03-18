@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head> <title>App Store</title> <link rel="stylesheet" href="/style.css"> </head>
+<body>
+    <div class="header">Premium App Store <span class="toggle-btn" onclick="toggleDarkMode()">🌙</span></div>
+    <div class="app-container">
+        <% apps.forEach(app => { %>
+            <div class="app-card">
+                <img src="<%= app.imageUrl %>" alt="App Image">
+                <h2><%= app.title %></h2>
+                <p><%= app.description %></p>
+                <a href="<%= app.downloadUrl %>" target="_blank">Download</a>
+            </div>
+        <% }) %>
+    </div>
+    <script> function toggleDarkMode() { document.body.classList.toggle("dark-mode"); } </script>
+</body>
+</html>
