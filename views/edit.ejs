@@ -1,5 +1,113 @@
-<form action="/admin/edit/<%= app._id %>" method="POST">
-  <input type="text" name="name" value="<%= app.name %>" required>
-  <input type="url" name="downloadUrl" value="<%= app.downloadUrl %>" required pattern="https?://.*\.apk" title="Must be a valid .apk URL">
-  <button type="submit">Update</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Edit Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-group {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+            color: white;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.3s ease-in-out;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label {
+            top: -12px;
+            left: 8px;
+            font-size: 12px;
+            color: #ffcc00;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #ffcc00;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .form-container button:hover {
+            background: #ffdb4d;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form action="/admin/edit/<%= app._id %>" method="POST">
+            <div class="input-group">
+                <input type="text" name="name" value="<%= app.name %>" required placeholder=" ">
+                <label>App Name</label>
+            </div>
+            <div class="input-group">
+                <input type="url" name="downloadUrl" value="<%= app.downloadUrl %>" required pattern="https?://.*\.apk" title="Must be a valid .apk URL" placeholder=" ">
+                <label>Download URL (.apk)</label>
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>
