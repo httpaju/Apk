@@ -1,12 +1,10 @@
- 
+
+
 const express = require('express');
 const router = express.Router();
 const App = require('../models/App'); // Make sure this is your model
 
-router.get('/dashboard', async (req, res) => {
-    
 
-module.exports = router;
 
 
 // Admin login page
@@ -21,13 +19,7 @@ router.post('/login', (req, res) => {
     } else {
         res.send('Invalid login credentials');
     }
- try {
-        const apps = await App.find(); // Fetch apps from DB
-        res.render('dashboard', { apps }); // Pass apps to dashboard.ejs
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
+ 
 
 });
 
@@ -35,6 +27,13 @@ router.post('/login', (req, res) => {
 router.get('/dashboard', (req, res) => {
     if (!req.session.admin) return res.redirect('/admin/login');
     res.render('dashboard');
+try {
+        const apps = await App.find(); // Fetch apps from DB
+        res.render('dashboard', { apps }); // Pass apps to dashboard.ejs
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 // Add app
@@ -44,5 +43,6 @@ router.post('/add', async (req, res) => {
     await App.create({ name, description, imageUrl, downloadUrl });
     res.redirect('/admin/dashboard');
 });
+
 
 module.exports = router;
