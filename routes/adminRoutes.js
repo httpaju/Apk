@@ -9,7 +9,7 @@ router.get('/login', (req, res) => res.render('login'));
 // Handle login (simple authentication)
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
-    if (username === 'admin' && password === 'password') {
+    if (username === 'ajmal' && password === 'ajmalajmal123') {
         req.session.admin = true;
         res.redirect('/admin/dashboard');
     } else {
