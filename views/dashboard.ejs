@@ -7,11 +7,12 @@
     <link rel="icon" type="image/x-icon" href="https://i.ibb.co/RXSb9zb/extracted-white-icon.png">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f3f4f6;
             margin: 0;
             display: flex;
             height: 100vh;
+            overflow-x: hidden;
         }
         aside {
             width: 250px;
@@ -20,10 +21,11 @@
             padding: 20px;
             position: fixed;
             height: 100vh;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
         }
         .menu-toggle {
-            display: none;
+            display: block;
             font-size: 24px;
             background: none;
             border: none;
@@ -72,6 +74,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
+            transition: transform 0.3s ease-in-out;
         }
         input, button {
             width: 100%;
@@ -85,23 +88,42 @@
             color: white;
             border: none;
             cursor: pointer;
+            transition: background 0.3s;
         }
         button:hover {
             background-color: #1e40af;
         }
-        
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #2563eb;
+            color: white;
+        }
+        table tr:hover {
+            background-color: #f1f5f9;
+        }
+
         @media (max-width: 768px) {
             aside {
                 transform: translateX(-100%);
             }
-            .menu-toggle {
-                display: block;
+            .sidebar-open aside {
+                transform: translateX(0);
             }
             main {
                 margin-left: 0;
-            }
-            .sidebar-open aside {
-                transform: translateX(0);
             }
         }
     </style>
@@ -111,7 +133,6 @@
         <h2>Admin Dashboard <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button></h2>
         <ul>
             <li><a href="/">Dashboard</a></li>
-          
         </ul>
     </aside>
     <main>
@@ -147,12 +168,8 @@
     <td colspan="3">No apps available</td>
   </tr>
 <% } %>
-
 </table>
-
     </main>
-
-
     <script>
         function toggleMenu() {
             document.body.classList.toggle("sidebar-open");
