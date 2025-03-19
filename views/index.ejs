@@ -6,15 +6,34 @@
     <title>AppZorix - App Store</title>
     <link rel="icon" href="https://i.ibb.co/9m29bBsr/extracted-white-icon-1-removebg-preview.png" type="image/png">
     
+    <!-- Google Font (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        /* General Styles */
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
+            background: #0d1117;
+            color: white;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ffcc00;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
         }
 
         /* Drawer Styles */
@@ -35,23 +54,26 @@
         .drawer {
             position: fixed;
             top: 0;
-            left: -250px;
-            width: 250px;
+            left: -260px;
+            width: 260px;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: left 0.3s ease-in-out;
             z-index: 1000;
+            border-radius: 0 10px 10px 0;
         }
 
         .drawer a {
             color: white;
             text-decoration: none;
-            font-size: 24px;
+            font-size: 20px;
             margin: 10px 0;
+            font-weight: bold;
         }
         .drawer a:hover {
             text-decoration: underline;
@@ -63,41 +85,23 @@
             right: 20px;
             background: red;
             color: white;
-            padding: 10px;
+            padding: 8px;
             cursor: pointer;
             border-radius: 5px;
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 30px;
-            padding: 10px;
-            background: #333;
-            color: white;
-            font-size: 16px;
-            animation: slideUp 1s ease-in-out;
-        }
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Logo Container */
+        /* Logo */
         .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #007bff;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 15px;
             border-radius: 10px;
             width: fit-content;
             margin: 20px auto;
-            gap: 10px; /* Space between logo and text */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .logo-container img {
@@ -118,18 +122,21 @@
             max-width: 400px;
         }
         .search-bar input {
-            padding: 10px;
+            padding: 12px;
             width: 70%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: white;
         }
         .search-bar button {
-            padding: 10px;
+            padding: 12px;
             border: none;
             background: #007bff;
             color: white;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
         /* App List */
@@ -140,17 +147,22 @@
             padding: 20px;
         }
         .app-card {
-            width: 150px;
+            width: 170px;
             margin: 10px;
             padding: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .app-card:hover {
+            transform: scale(1.05);
         }
         .app-card img {
             width: 100%;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
         /* Floating Donation Button */
@@ -165,20 +177,39 @@
             border-radius: 5px;
             font-weight: bold;
         }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <!-- Menu Button -->
     <button class="menu-btn" onclick="openDrawer()">☰</button>
 
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
     <!-- Drawer -->
     <div id="drawer" class="drawer">
-        <button class="close-btn" onclick="closeDrawer()">✖ Close</button>
+        <button class="close-btn" onclick="closeDrawer()">✖</button>
         <a href="https://appzorix-apk-upload.onrender.com" target="_blank">Upload Your Apk</a>
-        <a href="https://www.instagram.com/aj_applications/" target="_blank">Follow us on Instagram</a>
+        <a href="https://www.instagram.com/aj_applications/" target="_blank">Instagram</a>
     </div>
 
-    <!-- Logo Container -->
+    <!-- Logo -->
     <div class="logo-container">
         <img src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo">
         <h2>AppZorix</h2>
@@ -194,7 +225,7 @@
 
     <!-- App List -->
     <div class="app-list">
-          <% apps.forEach(app => { %>
+        <% apps.forEach(app => { %>
             <div class="app-card" onclick="window.location.href='/app/<%= app._id %>'">
                 <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
                 <h3><%= app.name %></h3>
@@ -203,26 +234,12 @@
     </div>
 
     <!-- Floating Donation Button -->
-    <a href="https://aj-t2s.ddnsking.com/donation" class="donation-button" target="_blank">
-        💰 Support Us
-    </a>
-
-    <!-- Footer -->
-    <div class="footer">
-        AJ APPLICATIONS | <a href="https://www.instagram.com/aj_applications/" target="_blank">Follow us on Instagram</a>
-    </div>
+    <a href="#" class="donation-button">💰 Support Us</a>
 
     <script>
-        function openDrawer() {
-    document.getElementById("drawer").style.left = "0"; // Move the drawer into view
-    document.querySelector(".menu-btn").style.display = "none"; // Hide the menu button
-}
-
-function closeDrawer() {
-    document.getElementById("drawer").style.left = "-250px"; // Move it out of view
-    document.querySelector(".menu-btn").style.display = "block"; // Show the menu button again
-}
-
+        function openDrawer() { document.getElementById("drawer").style.left = "0"; }
+        function closeDrawer() { document.getElementById("drawer").style.left = "-260px"; }
+        function toggleTheme() { document.body.classList.toggle('light-theme'); }
     </script>
 </body>
 </html>
