@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= app.name %> - AppZorix</title>
+    <link id="favicon" rel="icon" type="image/png" href="<%= app.imageUrl %>">
+
     <style>
         /* Global Styles */
         body {
@@ -17,6 +19,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         /* Container */
@@ -61,7 +64,7 @@
         }
 
         /* Buttons */
-        .download-btn, .share-btn {
+        .btn {
             display: inline-block;
             padding: 12px 25px;
             font-size: 16px;
@@ -91,6 +94,14 @@
         .share-btn:hover {
             background: #0056b3;
         }
+
+        .home-btn {
+            background: #ff9800;
+        }
+
+        .home-btn:hover {
+            background: #e68900;
+        }
     </style>
 </head>
 <body>
@@ -101,10 +112,13 @@
         <p><%= app.description %></p>
 
         <!-- Download Button -->
-        <a href="<%= app.downloadUrl %>" class="download-btn" target="_blank">Download</a>
+        <a href="<%= app.downloadUrl %>" class="btn download-btn" target="_blank">Download</a>
 
         <!-- Share Button -->
-        <button class="share-btn" onclick="shareApp()">Share</button>
+        <button class="btn share-btn" onclick="shareApp()">Share</button>
+
+        <!-- Back to Home Button -->
+        <a href="/" class="btn home-btn">Back to Home</a>
     </div>
 
     <script>
@@ -120,6 +134,13 @@
                 prompt("Copy this link and share:", appUrl);
             }
         }
+
+        // Change the Favicon dynamically
+        function updateFavicon() {
+            const favicon = document.getElementById("favicon");
+            favicon.href = "<%= app.imageUrl %>";
+        }
+        updateFavicon();
     </script>
 
 </body>
