@@ -16,6 +16,10 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(session({ secret: 'secret-key', resave: false, saveUninitialized: true }));
 
+// Load Routes
+const userRoutes = require('./routes/userRoutes');
+app.use(userRoutes);
+
 const App = require('./models/App');
 
 // Show Dashboard with App List
