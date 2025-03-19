@@ -4,115 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AppZorix - App Store</title>
-<link rel="icon" type="image/x-icon" href="https://i.ibb.co/RXSb9zb/extracted-white-icon.png">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
+        }
+        .search-bar {
+            margin: 20px auto;
             text-align: center;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            color: white;
-        }
-        .logo {
-            margin-top: 20px;
-        }
-        .logo img {
-            width: 250px;
-            height: auto;
-        }
-        h1 {
-            margin-top: 10px;
-            animation: fadeIn 1s ease-in-out;
         }
         .app-list {
             display: flex;
             flex-wrap: wrap;
+            gap: 15px;
             justify-content: center;
-            gap: 20px;
-            padding: 20px;
         }
         .app-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            width: 260px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 150px;
             text-align: center;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-            backdrop-filter: blur(10px);
+            background-color: #f9f9f9;
+            border-radius: 10px;
         }
         .app-card img {
-            width: 110px;
-            height: 110px;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-        }
-        .app-card:hover img {
-            transform: scale(1.1);
-        }
-        .app-card:hover {
-            transform: translateY(0);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-        .app-card a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 12px;
-            background: #ff9800;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .app-card a:hover {
-            background: #e68900;
-            transform: scale(1.05);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .donation-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff4081;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .donation-button:hover {
-            background: #e91e63;
-            transform: scale(1.1);
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="logo">
-        <img src="https://i.ibb.co/RXSb9zb/extracted-white-icon.png" alt="AppZorix Logo">
+
+    <div class="search-bar">
+        <form action="/" method="GET">
+            <input type="text" name="search" placeholder="Search apps..." value="<%= searchQuery || '' %>">
+            <button type="submit">Search</button>
+        </form>
     </div>
-    <h1>Welcome to AppZorix</h1>
-    <p>Developed by AJ APPLICATIONS</p>
+
     <div class="app-list">
-        <% apps.forEach((app, index) => { %>
-            <div class="app-card" style="animation: fadeIn 0.6s ease-in-out <%= index * 0.2 %>s forwards;">
-                <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
-                <h3><%= app.name %></h3>
-                <p><%= app.description %></p>
-                <a href="<%= app.downloadUrl %>">Download</a>
+        <% apps.forEach(app => { %>
+            <div class="app-card">
+                <a href="/app/<%= app._id %>">
+                    <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
+                    <h3><%= app.name %></h3>
+                </a>
             </div>
-        <% }) %>
+        <% }); %>
     </div>
-    
-    <a href="https://aj-t2s.ddnsking.com/donation" class="donation-button">Donate</a>
+
 </body>
 </html>
-
