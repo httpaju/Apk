@@ -6,7 +6,7 @@
     <title>AppZorix - App Store</title>
     <link rel="icon" href="https://i.ibb.co/9m29bBsr/extracted-white-icon-1-removebg-preview.png" type="image/png">
     
-    <!-- Google Font (Poppins) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -31,9 +31,14 @@
             padding: 10px 15px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 50px;
+            font-size: 18px;
             font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
 
         /* Drawer Styles */
@@ -43,51 +48,56 @@
             left: 15px;
             background: #007bff;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 18px;
             z-index: 1001;
+            transition: transform 0.2s ease;
+        }
+        .menu-btn:hover {
+            transform: scale(1.1);
         }
 
         .drawer {
             position: fixed;
             top: 0;
-            left: -260px;
-            width: 260px;
+            left: -270px;
+            width: 270px;
             height: 100vh;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding-top: 80px;
             transition: left 0.3s ease-in-out;
             z-index: 1000;
             border-radius: 0 10px 10px 0;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
         }
-
         .drawer a {
             color: white;
             text-decoration: none;
-            font-size: 20px;
-            margin: 10px 0;
+            font-size: 18px;
+            margin: 15px 0;
             font-weight: bold;
+            transition: 0.3s;
         }
         .drawer a:hover {
-            text-decoration: underline;
+            color: #ffcc00;
         }
-
         .close-btn {
             position: absolute;
             top: 20px;
             right: 20px;
             background: red;
             color: white;
-            padding: 8px;
+            padding: 10px;
+            border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px;
         }
 
         /* Logo */
@@ -96,22 +106,19 @@
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             padding: 15px;
             border-radius: 10px;
             width: fit-content;
             margin: 20px auto;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-
         .logo-container img {
             width: 50px;
             height: 50px;
+            margin-right: 10px;
         }
-
         .logo-container h2 {
             color: white;
-            margin: 0;
             font-size: 24px;
             font-weight: bold;
         }
@@ -123,12 +130,13 @@
         }
         .search-bar input {
             padding: 12px;
-            width: 70%;
+            width: 75%;
             border: none;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             color: white;
+            font-size: 16px;
         }
         .search-bar button {
             padding: 12px;
@@ -137,6 +145,7 @@
             color: white;
             cursor: pointer;
             border-radius: 8px;
+            font-size: 16px;
         }
 
         /* App List */
@@ -147,22 +156,22 @@
             padding: 20px;
         }
         .app-card {
-            width: 170px;
-            margin: 10px;
-            padding: 10px;
+            width: 180px;
+            margin: 15px;
+            padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease-in-out;
         }
         .app-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
         .app-card img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         /* Floating Donation Button */
@@ -172,16 +181,21 @@
             right: 20px;
             background: #ffcc00;
             color: black;
-            padding: 10px 15px;
+            padding: 12px 20px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
+        .donation-button:hover {
+            transform: scale(1.1);
         }
 
         /* Footer */
         .footer {
             margin-top: 30px;
-            padding: 10px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.5);
             color: white;
             font-size: 16px;
@@ -191,11 +205,11 @@
             color: #ffcc00;
             text-decoration: none;
             font-weight: bold;
-            margin-left: 10px;
         }
     </style>
 </head>
 <body>
+
     <!-- Menu Button -->
     <button class="menu-btn" onclick="openDrawer()">☰</button>
 
@@ -217,29 +231,30 @@
 
     <!-- Search Bar -->
     <div class="search-bar">
-        <form action="/" method="GET">
-            <input type="text" name="search" placeholder="Search apps..." value="<%= searchQuery || '' %>">
-            <button type="submit">Search</button>
-        </form>
+        <input type="text" placeholder="Search apps...">
+        <button>Search</button>
     </div>
 
     <!-- App List -->
     <div class="app-list">
-        <% apps.forEach(app => { %>
-            <div class="app-card" onclick="window.location.href='/app/<%= app._id %>'">
-                <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
-                <h3><%= app.name %></h3>
-            </div>
-        <% }); %>
+        <!-- App Cards Here -->
     </div>
 
     <!-- Floating Donation Button -->
     <a href="#" class="donation-button">💰 Support Us</a>
 
     <script>
-        function openDrawer() { document.getElementById("drawer").style.left = "0"; }
-        function closeDrawer() { document.getElementById("drawer").style.left = "-260px"; }
-        function toggleTheme() { document.body.classList.toggle('light-theme'); }
-    </script>
+    function openDrawer() {
+        document.getElementById("drawer").style.left = "0";
+        document.querySelector(".menu-btn").style.display = "none"; // Hide menu button
+    }
+
+    function closeDrawer() {
+        document.getElementById("drawer").style.left = "-270px";
+        document.querySelector(".menu-btn").style.display = "block"; // Show menu button
+    }
+</script>
+
+
 </body>
 </html>
