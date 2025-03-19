@@ -43,4 +43,20 @@ router.post('/add', async (req, res) => {
     }
 });
 
+
+router.get('/app/:id', async (req, res) => {
+    if (!req.session.admin) return res.redirect('/admin/login');
+    
+    try {
+        const app = await App.findById(req.params.id);
+        if (!app) return res.status(404).send('App not found');
+        
+        res.render('appDetails', { app }); // Pass app data to the new view
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 module.exports = router;
