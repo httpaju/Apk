@@ -27,7 +27,13 @@ router.get('/app/:id', async (req, res) => {
         const app = await App.findById(req.params.id);
         if (!app) return res.status(404).send('App not found');
 
-        res.render('app-details', { app });
+        // Get 3 random suggested apps (excluding the current one)
+        const suggestedApps = await App.aggregate([
+            { $match: { _id: { $ne: app._id } } }, // Exclude current app
+            { $sample: { size: 3 } } // Get 3 random apps
+        ]);
+
+        res.render('app-details', { app, suggestedApps });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
