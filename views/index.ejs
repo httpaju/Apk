@@ -175,12 +175,10 @@
 
     <!-- App List -->
     <div class="app-list">
-        <% apps.forEach(app => { %>
-            <div class="app-card">
-                <a href="/app/<%= app._id %>">
-                    <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
-                    <h3><%= app.name %></h3>
-                </a>
+          <% apps.forEach(app => { %>
+            <div class="app-card" onclick="window.location.href='/app/<%= app._id %>'">
+                <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
+                <h3><%= app.name %></h3>
             </div>
         <% }); %>
     </div>
