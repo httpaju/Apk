@@ -214,11 +214,13 @@
 
     <script>
         function openDrawer() {
-    document.getElementById("drawer").style.width = "250px";
+    document.getElementById("drawer").style.left = "0"; // Move the drawer into view
+    document.querySelector(".menu-btn").style.display = "none"; // Hide the menu button
 }
 
 function closeDrawer() {
-    document.getElementById("drawer").style.width = "0";
+    document.getElementById("drawer").style.left = "-250px"; // Move it out of view
+    document.querySelector(".menu-btn").style.display = "block"; // Show the menu button again
 }
 
     </script>
