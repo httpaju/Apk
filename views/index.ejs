@@ -26,7 +26,7 @@
             position: fixed;
             top: 15px;
             right: 15px;
-            background: #ffcc00;
+            background: #007bff;
             color: black;
             padding: 10px 15px;
             border: none;
@@ -206,6 +206,29 @@
             text-decoration: none;
             font-weight: bold;
         }
+    /* Light Theme Styles */
+    .light-theme {
+        background: #ffffff;
+        color: black;
+    }
+
+    .light-theme .drawer {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .light-theme .search-bar input {
+        background: rgba(0, 0, 0, 0.1);
+        color: black;
+    }
+
+    .light-theme .menu-btn {
+        background: #0056b3;
+    }
+
+    .light-theme .theme-toggle {
+        background: #222;
+        color: white;
+    }
     </style>
 </head>
 <body>
@@ -260,6 +283,25 @@
         document.getElementById("drawer").style.left = "-270px";
         document.querySelector(".menu-btn").style.display = "block"; // Show menu button
     }
+function toggleTheme() {
+        const body = document.body;
+        const isLight = body.classList.toggle("light-theme");
+
+        // Save user preference in local storage
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+
+        // Change button emoji dynamically
+        document.querySelector(".theme-toggle").textContent = isLight ? "☀️" : "🌙";
+    }
+
+    // Apply saved theme on page load
+    window.onload = function() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+            document.body.classList.add("light-theme");
+            document.querySelector(".theme-toggle").textContent = "☀️";
+        }
+    };
 </script>
 
 
