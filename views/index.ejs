@@ -4,38 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AppZorix - App Store</title>
+    <link rel="icon" href="https://i.ibb.co/9m29bBsr/extracted-white-icon-1-removebg-preview.png" type="image/png">
+    
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
+
+        /* Logo Container */
+        .logo-container {
+            background: #007bff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: slideDown 1s ease-in-out;
+        }
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Search Bar */
         .search-bar {
             margin: 20px auto;
             text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
         }
+        .search-bar input {
+            padding: 10px;
+            width: 250px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: 0.3s;
+        }
+        .search-bar input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        }
+        .search-bar button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* App List */
         .app-list {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
-            justify-content: center;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 10px;
+            animation: fadeInUp 1s ease-in-out;
         }
+
+        /* App Card */
         .app-card {
             border: 1px solid #ddd;
             padding: 10px;
-            width: 150px;
-            text-align: center;
-            background-color: #f9f9f9;
+            background-color: #fff;
             border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: zoomIn 0.8s ease-in-out;
+        }
+        .app-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         }
         .app-card img {
             width: 100px;
             height: 100px;
             object-fit: cover;
             border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .app-card:hover img {
+            transform: rotate(5deg);
+        }
+
+        /* Floating Donation Button */
+        .donation-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .donation-button:hover {
+            background-color: #e64a19;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            font-size: 16px;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Logo Container -->
+    <div class="logo-container">
+        <img src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo">
+        AppZorix
+    </div>
+
+    <!-- Search Bar -->
     <div class="search-bar">
         <form action="/" method="GET">
             <input type="text" name="search" placeholder="Search apps..." value="<%= searchQuery || '' %>">
@@ -43,6 +173,7 @@
         </form>
     </div>
 
+    <!-- App List -->
     <div class="app-list">
         <% apps.forEach(app => { %>
             <div class="app-card">
@@ -52,6 +183,16 @@
                 </a>
             </div>
         <% }); %>
+    </div>
+
+    <!-- Floating Donation Button -->
+    <a href="https://aj-t2s.ddnsking.com/donation" class="donation-button" target="_blank">
+        💰 Support Us
+    </a>
+
+    <!-- Footer -->
+    <div class="footer">
+        AJ APPLICATIONS
     </div>
 
 </body>
