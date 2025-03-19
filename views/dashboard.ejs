@@ -189,6 +189,23 @@
   </tr>
 <% } %>
 </table>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th>Download</th>
+  </tr>
+  <% apps.forEach(app => { %>
+    <tr>
+      <td><a href="/admin/app/<%= app._id %>"><%= app.name %></a></td>
+      <td><%= app.description %></td>
+      <td><img src="<%= app.imageUrl %>" alt="<%= app.name %>" width="50"></td>
+      <td><a href="<%= app.downloadUrl %>" target="_blank">Download</a></td>
+    </tr>
+  <% }); %>
+</table>
+
     </main>
     <script>
         function toggleMenu() {
