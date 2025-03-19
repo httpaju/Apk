@@ -1,23 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= app.name %></title>
-
-    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/RXSb9zb/extracted-white-icon.png">
+    <title><%= app.name %> - App Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .app-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .app-container img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="logo">
-        <img src="https://i.ibb.co/RXSb9zb/extracted-white-icon.png" alt="AppZorix Logo">
+
+    <div class="app-container">
+        <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
+        <h1><%= app.name %></h1>
+        <p><%= app.description %></p>
+        <a href="<%= app.downloadUrl %>" target="_blank">Download APK</a>
     </div>
-    <h1><%= app.name %></h1>
-    <p><%= app.description %></p>
-    <img src="<%= app.imageUrl %>" alt="<%= app.name %>" width="200">
-    <br>
-    <a href="<%= app.downloadUrl %>" target="_blank">Download</a>
-    <br>
-    <a href="/apps">Back to AppZorix</a>
+
 </body>
 </html>
