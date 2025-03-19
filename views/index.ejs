@@ -283,9 +283,18 @@
         document.getElementById("drawer").style.left = "-270px";
         document.querySelector(".menu-btn").style.display = "block"; // Show menu button
     }
-function toggleTheme() {
+
+    function toggleTheme() {
         const body = document.body;
         const isLight = body.classList.toggle("light-theme");
+
+        // Update logo based on theme
+        document.getElementById("logo-img").src = isLight 
+            ? "https://i.ibb.co/g1Fcs7b/20250319-223229.png"  // Light mode logo
+            : "https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png";  // Dark mode logo
+
+        // Change logo text color
+        document.getElementById("logo-text").style.color = isLight ? "#333" : "#FFF";
 
         // Save user preference in local storage
         localStorage.setItem("theme", isLight ? "light" : "dark");
@@ -297,9 +306,13 @@ function toggleTheme() {
     // Apply saved theme on page load
     window.onload = function() {
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "light") {
+        const isLight = savedTheme === "light";
+
+        if (isLight) {
             document.body.classList.add("light-theme");
             document.querySelector(".theme-toggle").textContent = "☀️";
+            document.getElementById("logo-img").src = "https://i.ibb.co/g1Fcs7b/20250319-223229.png";
+            document.getElementById("logo-text").style.color = "#333";
         }
     };
 </script>
