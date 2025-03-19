@@ -231,13 +231,20 @@
 
     <!-- Search Bar -->
     <div class="search-bar">
-        <input type="text" placeholder="Search apps...">
-        <button>Search</button>
+        <form action="/" method="GET">
+            <input type="text" name="search" placeholder="Search apps..." value="<%= searchQuery || '' %>">
+            <button type="submit">Search</button>
+        </form>
     </div>
 
     <!-- App List -->
     <div class="app-list">
-        <!-- App Cards Here -->
+        <% apps.forEach(app => { %>
+            <div class="app-card" onclick="window.location.href='/app/<%= app._id %>'">
+                <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
+                <h3><%= app.name %></h3>
+            </div>
+        <% }); %>
     </div>
 
     <!-- Floating Donation Button -->
