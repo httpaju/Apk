@@ -4,34 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= app.name %> - App Details</title>
+    <link rel="icon" href="https://i.ibb.co/9m29bBsr/extracted-white-icon-1-removebg-preview.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .logo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo-container img {
+            width: 100px;
+            height: auto;
         }
         .app-container {
             max-width: 500px;
-            margin: 20px auto;
+            margin: 40px auto;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-in-out;
         }
         .app-container img {
             width: 150px;
             height: 150px;
             object-fit: cover;
             border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .app-container img:hover {
+            transform: scale(1.1);
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
+    <div class="logo-container">
+        <img src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo">
+    </div>
+    
     <div class="app-container">
         <img src="<%= app.imageUrl %>" alt="<%= app.name %>">
         <h1><%= app.name %></h1>
         <p><%= app.description %></p>
-        <a href="<%= app.downloadUrl %>" target="_blank">Download APK</a>
+        <a href="<%= app.downloadUrl %>" target="_blank" class="download-btn">📥 Download APK</a>
     </div>
 
 </body>
