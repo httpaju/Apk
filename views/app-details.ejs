@@ -218,9 +218,24 @@
             }
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle("light-theme");
+          function toggleTheme() {
+            const body = document.body;
+            const isLight = body.classList.toggle("light-theme");
+            document.getElementById("logo-img").src = isLight 
+                ? "https://i.ibb.co/g1Fcs7b/20250319-223229.png"
+                : "https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png";
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+            document.querySelector(".theme-toggle").textContent = isLight ? "☀️" : "🌙";
         }
+
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "light") {
+                document.body.classList.add("light-theme");
+                document.getElementById("logo-img").src = "https://i.ibb.co/g1Fcs7b/20250319-223229.png";
+                document.querySelector(".theme-toggle").textContent = "☀️";
+            }
+        };
     </script>
 
 </body>
