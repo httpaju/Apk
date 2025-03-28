@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= app.name %> - AppZorix</title>
     <link id="favicon" rel="icon" type="image/png" href="<%= app.imageUrl %>">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -44,12 +42,12 @@
             margin-right: 10px;
         }
         .logo-container h2 {
-            color: white;
             font-size: 24px;
             font-weight: bold;
+            color: inherit;
         }
 
-        /* App Details Container */
+        /* App Details */
         .container {
             width: 90%;
             max-width: 500px;
@@ -80,6 +78,7 @@
             margin-bottom: 20px;
         }
 
+        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 25px;
@@ -95,29 +94,14 @@
             margin: 10px;
         }
 
-        .download-btn {
-            background: #4CAF50;
-        }
+        .download-btn { background: #4CAF50; }
+        .download-btn:hover { background: #45a049; }
 
-        .download-btn:hover {
-            background: #45a049;
-        }
+        .back-btn { background: #007bff; }
+        .back-btn:hover { background: #0056b3; }
 
-        .back-btn {
-            background: #007bff;
-        }
-
-        .back-btn:hover {
-            background: #0056b3;
-        }
-
-        .share-btn {
-            background: #ff9800;
-        }
-
-        .share-btn:hover {
-            background: #e68900;
-        }
+        .share-btn { background: #ff9800; }
+        .share-btn:hover { background: #e68900; }
 
         .theme-toggle {
             position: fixed;
@@ -134,10 +118,9 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.2s ease;
         }
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-   /* Suggested Apps Section */
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        /* Suggested Apps */
         .suggestions {
             margin-top: 20px;
             padding: 15px;
@@ -167,9 +150,7 @@
             transition: transform 0.2s ease;
         }
 
-        .suggested-app:hover {
-            transform: scale(1.05);
-        }
+        .suggested-app:hover { transform: scale(1.05); }
 
         .suggested-app img {
             width: 100%;
@@ -188,33 +169,41 @@
 </head>
 <body>
 
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
     <!-- Logo -->
     <div class="logo-container">
-        <img id="logo-img" src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo">
+        <img id="logo-img" src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix">
         <h2 id="logo-text">AppZorix</h2>
     </div>
 
     <!-- App Details -->
     <div class="container">
         <img class="app-icon" src="<%= app.imageUrl %>" alt="<%= app.name %>">
-        <h1 class="app-title"><%= app.name %></h1>
-        <p class="app-description"><%= app.description %></p>
-        <a href="<%= app.downloadUrl %>" class="btn download-btn" target="_blank">Download</a>
-        <a href="/" class="btn back-btn">Back to Home</a>
-        <button class="btn share-btn" onclick="shareApp()">📤 Share</button>
+        <div class="app-title"><%= app.name %></div>
+        <div class="app-description"><%= app.description %></div>
+
+        <a href="<%= app.downloadLink %>" class="btn download-btn">Download</a>
+        <button class="btn share-btn" onclick="shareApp()">Share</button>
+        <button class="btn back-btn" onclick="history.back()">Back</button>
     </div>
-   <!-- Suggested Apps Section -->
+
+    <!-- Suggested Apps -->
     <div class="suggestions">
         <h3>You may also like</h3>
         <div class="suggested-apps">
-            <% suggestedApps.forEach(suggested => { %>
-                <div class="suggested-app" onclick="location.href='/app/<%= suggested._id %>'">
-                    <img src="<%= suggested.imageUrl %>" alt="<%= suggested.name %>" loading="lazy">
-                    <span><%= suggested.name %></span>
-                </div>
+            <% if (suggestedApps && suggestedApps.length > 0) { %>
+                <% suggestedApps.forEach(suggested => { %>
+                    <div class="suggested-app" onclick="location.href='/app/<%= suggested._id %>'">
+                        <img src="<%= suggested.imageUrl %>" alt="<%= suggested.name %>" loading="lazy">
+                        <span><%= suggested.name %></span>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No suggested apps available.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
     <script>
         function shareApp() {
@@ -230,25 +219,9 @@
         }
 
         function toggleTheme() {
-            const body = document.body;
-            const isLight = body.classList.toggle("light-theme");
-            document.getElementById("logo-img").src = isLight 
-                ? "https://i.ibb.co/g1Fcs7b/20250319-223229.png"  // Light mode logo
-                : "https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png";  // Dark mode logo
-            document.getElementById("logo-text").style.color = isLight ? "#333" : "#FFF";
-            localStorage.setItem("theme", isLight ? "light" : "dark");
-            document.querySelector(".theme-toggle").textContent = isLight ? "☀️" : "🌙";
+            document.body.classList.toggle("light-theme");
         }
-
-        window.onload = function() {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme === "light") {
-                document.body.classList.add("light-theme");
-                document.querySelector(".theme-toggle").textContent = "☀️";
-                document.getElementById("logo-img").src = "https://i.ibb.co/g1Fcs7b/20250319-223229.png";
-                document.getElementById("logo-text").style.color = "#333";
-            }
-        };
     </script>
+
 </body>
 </html>
