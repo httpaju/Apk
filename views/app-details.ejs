@@ -207,14 +207,15 @@
 
     <script>
         function shareApp() {
+                 const appUrl = window.location.href;
             if (navigator.share) {
                 navigator.share({
-                    title: document.title,
-                    text: "Check out this app on AppZorix!",
-                    url: window.location.href
-                });
+                    title: "<%= app.name %>",
+                    text: "Check out this amazing app on AppZorix!",
+                    url: appUrl
+                }).catch(err => console.log('Sharing failed', err));
             } else {
-                alert("Sharing not supported on this browser.");
+                prompt("Copy this link and share:", appUrl);
             }
         }
 
