@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= app.name %> - AppZorix</title>
     <link id="favicon" rel="icon" type="image/png" href="<%= app.imageUrl %>">
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #141e30, #243b55);
-            color: #fff;
             text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            min-height: 100vh;
+            background: #0d1117;
+            color: white;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .light-theme {
+            background: #ffffff;
+            color: black;
         }
 
         /* Logo */
-        .logo {
-            width: 120px;
-            margin-bottom: 15px;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .logo-container h2 {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        /* Container */
+        /* App Details Container */
         .container {
             width: 90%;
             max-width: 500px;
@@ -38,20 +59,27 @@
             backdrop-filter: blur(10px);
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin: 20px auto;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .app-description {
+            font-size: 16px;
             margin-bottom: 20px;
         }
 
-        /* App Image */
-        .app-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            margin-bottom: 15px;
-        }
-
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 25px;
@@ -75,116 +103,96 @@
             background: #45a049;
         }
 
-        .share-btn {
+        .back-btn {
             background: #007bff;
         }
 
-        .share-btn:hover {
+        .back-btn:hover {
             background: #0056b3;
         }
 
-        .home-btn {
+        .share-btn {
             background: #ff9800;
         }
 
-        .home-btn:hover {
+        .share-btn:hover {
             background: #e68900;
         }
 
-        /* Suggested Apps */
-        .suggestions {
-            width: 90%;
-            max-width: 500px;
-            padding: 15px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .suggestion-title {
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
         }
-
-        .suggested-apps {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .suggested-app {
-            width: 80px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .suggested-app img {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            object-fit: cover;
-            box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
-        }
-
-        .suggested-app span {
-            display: block;
-            font-size: 12px;
-            margin-top: 5px;
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- AppZorix Logo -->
-    <img src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo" class="logo">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
-    <!-- Main App Details -->
-    <div class="container">
-        <img class="app-image" src="<%= app.imageUrl %>" alt="<%= app.name %>">
-        <h2><%= app.name %></h2>
-        <p><%= app.description %></p>
-
-        <a href="<%= app.downloadUrl %>" class="btn download-btn" target="_blank">Download</a>
-        <button class="btn share-btn" onclick="shareApp()">Share</button>
-        <a href="/" class="btn home-btn">Back to Home</a>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img id="logo-img" src="https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png" alt="AppZorix Logo">
+        <h2 id="logo-text">AppZorix</h2>
     </div>
 
-    <!-- Suggested Apps Section -->
-    <div class="suggestions">
-        <div class="suggestion-title">You may also like</div>
-        <div class="suggested-apps">
-            <% suggestedApps.forEach(suggested => { %>
-                <div class="suggested-app" onclick="location.href='/app/<%= suggested._id %>'">
-                    <img src="<%= suggested.imageUrl %>" alt="<%= suggested.name %>">
-                    <span><%= suggested.name %></span>
-                </div>
-            <% }) %>
-        </div>
+    <!-- App Details -->
+    <div class="container">
+        <img class="app-icon" src="<%= app.imageUrl %>" alt="<%= app.name %>">
+        <h1 class="app-title"><%= app.name %></h1>
+        <p class="app-description"><%= app.description %></p>
+        <a href="<%= app.downloadUrl %>" class="btn download-btn" target="_blank">Download</a>
+        <a href="/" class="btn back-btn">Back to Home</a>
+        <button class="btn share-btn" onclick="shareApp()">📤 Share</button>
     </div>
 
     <script>
         function shareApp() {
-            const appUrl = window.location.href;
             if (navigator.share) {
                 navigator.share({
-                    title: "<%= app.name %>",
-                    text: "Check out this amazing app on AppZorix!",
-                    url: appUrl
-                }).catch(err => console.log('Sharing failed', err));
+                    title: document.title,
+                    text: "Check out this app on AppZorix!",
+                    url: window.location.href
+                });
             } else {
-                prompt("Copy this link and share:", appUrl);
+                alert("Sharing not supported on this browser.");
             }
         }
 
-        // Change the Favicon dynamically
-        function updateFavicon() {
-            const favicon = document.getElementById("favicon");
-            favicon.href = "<%= app.imageUrl %>";
+        function toggleTheme() {
+            const body = document.body;
+            const isLight = body.classList.toggle("light-theme");
+            document.getElementById("logo-img").src = isLight 
+                ? "https://i.ibb.co/g1Fcs7b/20250319-223229.png"  // Light mode logo
+                : "https://i.ibb.co/DD0spV8M/extracted-white-icon-1.png";  // Dark mode logo
+            document.getElementById("logo-text").style.color = isLight ? "#333" : "#FFF";
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+            document.querySelector(".theme-toggle").textContent = isLight ? "☀️" : "🌙";
         }
-        updateFavicon();
-    </script>
 
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "light") {
+                document.body.classList.add("light-theme");
+                document.querySelector(".theme-toggle").textContent = "☀️";
+                document.getElementById("logo-img").src = "https://i.ibb.co/g1Fcs7b/20250319-223229.png";
+                document.getElementById("logo-text").style.color = "#333";
+            }
+        };
+    </script>
 </body>
 </html>
