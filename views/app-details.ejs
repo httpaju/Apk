@@ -137,6 +137,53 @@
         .theme-toggle:hover {
             transform: scale(1.1);
         }
+   /* Suggested Apps Section */
+        .suggestions {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .suggestions h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .suggested-apps {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .suggested-app {
+            width: 120px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .suggested-app:hover {
+            transform: scale(1.05);
+        }
+
+        .suggested-app img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .suggested-app span {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -159,6 +206,15 @@
         <a href="/" class="btn back-btn">Back to Home</a>
         <button class="btn share-btn" onclick="shareApp()">📤 Share</button>
     </div>
+   <!-- Suggested Apps Section -->
+    <div class="suggestions">
+        <h3>You may also like</h3>
+        <div class="suggested-apps">
+            <% suggestedApps.forEach(suggested => { %>
+                <div class="suggested-app" onclick="location.href='/app/<%= suggested._id %>'">
+                    <img src="<%= suggested.imageUrl %>" alt="<%= suggested.name %>" loading="lazy">
+                    <span><%= suggested.name %></span>
+                </div>
 
     <script>
         function shareApp() {
